@@ -5,13 +5,13 @@ import com.example.clientes.commons.domains.generic.ProductDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface IProductsServices {
-    ResponseEntity<GenericResponseDTO> createClient(ProductDTO productDTO);
+    ResponseEntity<GenericResponseDTO> createProduct(ProductDTO productDTO);
 
-    ResponseEntity<GenericResponseDTO> getProduct();
+    ResponseEntity<GenericResponseDTO> getProducts();
 
-    ResponseEntity<GenericResponseDTO> getProduct(String idProducto);
+    ResponseEntity<GenericResponseDTO> getProduct(String idProduct);
 
     ResponseEntity<GenericResponseDTO> updateProduct(ProductDTO productDTO);
 
-    ResponseEntity<GenericResponseDTO> deleteProduct(ProductDTO productDTO);
+    ResponseEntity<GenericResponseDTO> deleteProduct(String idProduct);
 }

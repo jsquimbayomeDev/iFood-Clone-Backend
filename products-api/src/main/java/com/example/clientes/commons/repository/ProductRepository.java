@@ -12,8 +12,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
     @Override
     List<ProductEntity> findAll();
 
-    Optional<ProductEntity> findByTypeProducto(String typeProducto);
+    Optional<ProductEntity> findByCodTypeProduct(String codTypeProduct);
 
-    Optional<ProductEntity> findByIdProducto(Integer idProducto);
+    Optional<ProductEntity> findByIdProduct(Integer nameProduct);
 
 }

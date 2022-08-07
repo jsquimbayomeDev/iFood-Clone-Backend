@@ -4,6 +4,7 @@ import com.example.clientes.commons.constants.IEndpointProductApi;
 import com.example.clientes.commons.constants.ResponseMassage;
 import com.example.clientes.commons.domains.generic.GenericResponseDTO;
 import com.example.clientes.commons.domains.generic.ProductDTO;
+import com.example.clientes.service.products.IProductsServices;
 import com.example.clientes.web.api.rest.IProductManagerApi;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,6 +19,12 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 public class ProductManagerApiImpl implements IProductManagerApi {
 
+    private final IProductsServices iProductsServices;
+
+    public ProductManagerApiImpl(IProductsServices iProductsServices) {
+        this.iProductsServices = iProductsServices;
+    }
+
 
     @Override
     @PostMapping(IEndpointProductApi.CREATE_PRODUCT)
@@ -27,7 +34,7 @@ public class ProductManagerApiImpl implements IProductManagerApi {
             @ApiResponse(code = 400, message = ResponseMassage.CREATE_FAIL, response = String.class),
             @ApiResponse(code = 500, message = ResponseMassage.INTERNAL_SERVER)})
     public ResponseEntity<GenericResponseDTO> createProduct(ProductDTO productDTO) {
-        return null;
+        return  iProductsServices.createProduct(productDTO) ;
     }
 
     @Override
@@ -38,7 +45,7 @@ public class ProductManagerApiImpl implements IProductManagerApi {
             @ApiResponse(code = 400, message = ResponseMassage.GET_FAIL, response = String.class),
             @ApiResponse(code = 500, message = ResponseMassage.INTERNAL_SERVER)})
     public ResponseEntity<GenericResponseDTO> getProducts() {
-        return null;
+        return iProductsServices.getProducts();
     }
 
     @Override
@@ -49,7 +56,7 @@ public class ProductManagerApiImpl implements IProductManagerApi {
             @ApiResponse(code = 400, message = ResponseMassage.UPDATE_FAIL, response = String.class),
             @ApiResponse(code = 500, message = ResponseMassage.INTERNAL_SERVER)})
     public ResponseEntity<GenericResponseDTO> updateProduct(ProductDTO productDTO) {
-        return null;
+        return iProductsServices.updateProduct(productDTO);
     }
 
     @Override
@@ -59,7 +66,7 @@ public class ProductManagerApiImpl implements IProductManagerApi {
             @ApiResponse(code = 200, message = ResponseMassage.DELETE_SUCCESS, response = GenericResponseDTO.class),
             @ApiResponse(code = 400, message = ResponseMassage.DELETE_FAIL, response = String.class),
             @ApiResponse(code = 500, message = ResponseMassage.INTERNAL_SERVER)})
-    public ResponseEntity<GenericResponseDTO> deleteProduct(String idTask) {
-        return null;
+    public ResponseEntity<GenericResponseDTO> deleteProduct(String idProduct) {
+        return iProductsServices.deleteProduct(idProduct);
     }
 }

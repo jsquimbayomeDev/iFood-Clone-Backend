@@ -24,94 +24,18 @@ public class ProductsServices implements IProductsServices {
     private ProductRepository productRepository;
 
     @Override
-    @Modifying
-    public ResponseEntity<GenericResponseDTO> createClient(ProductDTO productDTO) {
-        ProductEntity productEntity  = new ProductEntity();
-        try{
-            productEntity.setIdProducto(Integer.parseInt(productDTO.getIdProducto()));
-            productEntity.setPriceProduct(productDTO.getPriceProduct());
-            productEntity.setNameProducto(productDTO.getNameProducto());
-            productEntity.setTypeProducto(productDTO.getTypeProducto());
-            productEntity.setEstaEnOferta(productEntity.isEstaEnOferta());
-            productRepository.save(productEntity);
-            return new ResponseEntity<>(GenericResponseDTO.builder()
-                    .message("producto creado")
-                    .objectResponse(productDTO)
-                    .statusCode(HttpStatus.OK.value())
-                    .build(), HttpStatus.OK);
-
-        }catch (Exception e){
-            log.error("Fallo al guardar el producto " + e);
-            return new ResponseEntity<>(GenericResponseDTO.builder()
-                    .message("Error creando producto:  " + e.getMessage())
-                    .objectResponse(null)
-                    .statusCode(HttpStatus.BAD_REQUEST.value())
-                    .build(), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<GenericResponseDTO> createProduct(ProductDTO productDTO) {
+        return null;
     }
 
     @Override
-    public ResponseEntity<GenericResponseDTO> getProduct() {
-        List<ProductEntity> productEntity = new ArrayList();
-        List<ProductDTO> productDTOS = new ArrayList();
-        try{
-            //me estoy trallendo todos los productos
-            productEntity = productRepository.findAll();
-            if(!productEntity.isEmpty()){
-                //convertirlos a DTO
-                for (ProductEntity product: productEntity) {
-                    ProductDTO productDTO = new ProductDTO();
-                    productDTO.setIdProducto(product.getIdProducto().toString());
-                    productDTO.setPriceProduct(product.getPriceProduct());
-                    productDTO.setNameProducto(product.getNameProducto());
-                    productDTO.setTypeProducto(product.getTypeProducto());
-                    productDTO.setEstaEnOferta(product.isEstaEnOferta());
-                    productDTOS.add(productDTO);
-                }
-
-            }
-            return new ResponseEntity<>(GenericResponseDTO.builder()
-                    .message("productDTOS encontrados")
-                    .objectResponse(productDTOS)
-                    .statusCode(HttpStatus.OK.value())
-                    .build(), HttpStatus.OK);
-        }catch (Exception e){
-            log.error("Fallo al encontrar el producto " + e);
-            return new ResponseEntity<>(GenericResponseDTO.builder()
-                    .message("Error creando producto:  " + e.getMessage())
-                    .objectResponse(null)
-                    .statusCode(HttpStatus.BAD_REQUEST.value())
-                    .build(), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<GenericResponseDTO> getProducts() {
+        return null;
     }
 
-
     @Override
-    public ResponseEntity<GenericResponseDTO> getProduct(String idProducto) {
-        Optional<ProductEntity> productEntity;
-        ProductDTO productDTO = new ProductDTO();
-        try{
-            productEntity = productRepository.findByIdProducto(Integer.parseInt(idProducto));
-            if(productEntity.isPresent()){
-                productDTO.setIdProducto(productEntity.get().getIdProducto().toString());
-                productDTO.setPriceProduct(productEntity.get().getPriceProduct());
-                productDTO.setNameProducto(productEntity.get().getNameProducto());
-                productDTO.setTypeProducto(productEntity.get().getTypeProducto());
-                productDTO.setEstaEnOferta(productEntity.get().isEstaEnOferta());
-            } return new ResponseEntity<>(GenericResponseDTO.builder()
-                    .message("productDTOS encontrados")
-                    .objectResponse(productDTO)
-                    .statusCode(HttpStatus.OK.value())
-                    .build(), HttpStatus.OK);
-
-        }catch (Exception e){
-            log.error("Fallo al encontrar el producto " + e);
-            return new ResponseEntity<>(GenericResponseDTO.builder()
-                    .message("Error creando producto:  " + e.getMessage())
-                    .objectResponse(null)
-                    .statusCode(HttpStatus.BAD_REQUEST.value())
-                    .build(), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<GenericResponseDTO> getProduct(String idProduct) {
+        return null;
     }
 
     @Override
@@ -120,8 +44,7 @@ public class ProductsServices implements IProductsServices {
     }
 
     @Override
-    public ResponseEntity<GenericResponseDTO> deleteProduct(ProductDTO productDTO) {
+    public ResponseEntity<GenericResponseDTO> deleteProduct(String idProduct) {
         return null;
     }
-
 }
